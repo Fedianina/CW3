@@ -18,7 +18,7 @@ public class Connector {
             connection= new Connection<>(new Socket(ip, port));
 
         } catch (IIOException  e){
-            System.out.println("IO, Class");
+            System.out.println("Не удается соединится с сервером");
         }catch (Exception e){
             System.out.println("Сервер недоступен, попробуйте подключится позднее");
             throw new RuntimeException("Сервер не найден");
@@ -26,8 +26,7 @@ public class Connector {
     }
     public void sendNewMessage(String clientName, String messageText){
         try {
-            Message message = new Message(clientName,messageText,null);
-            System.out.println("Сообщение сформировано"+connection);
+            Message message = new Message(clientName,messageText);
             connection.sendMessage(message);
         } catch (IOException e) {
             System.out.println("Connection error: cannot send the message");
@@ -37,9 +36,9 @@ public class Connector {
         try {
             return connection.readMessage();
         } catch (IIOException | ClassNotFoundException e) {
-            System.out.println("обработкаIIOException и ClassNotFoundException");
+            System.out.println("Не удается прочитать сообщение");
         } catch (Exception e) {
-            System.out.println("Обработка Exception");
+            System.out.println("Не удается прочитать сообщение");
         }
         return null;
     }

@@ -8,22 +8,14 @@ public class Message implements Serializable {
     private String text;
     private LocalDateTime dateTime;
 
-    private Connection<Message> sender;
 
-    public Message(String name, String text, Connection connection) {
+    public Message(String name, String text) {
         this.name = name;
         this.text = text;
-        this.sender=connection;
         dateTime = LocalDateTime.now();
     }
 
-    public Connection<Message> getSender() {
-        return sender;
-    }
 
-    public void setSender(Connection<Message> sender) {
-        this.sender = sender;
-    }
 
     public String getText() {
         return "["+dateTime.toString()+"]"+name+": "+text;

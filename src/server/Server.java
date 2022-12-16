@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Server {
     private int port = 1024;
     private CopyOnWriteArrayList<Connection> connectionsCollect = new CopyOnWriteArrayList();
-    private ArrayBlockingQueue<Message> messages = new ArrayBlockingQueue(10, true);
+    private ArrayBlockingQueue<MessageFromClient> messages = new ArrayBlockingQueue(10, true);
 
 
     public Server() {

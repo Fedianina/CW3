@@ -16,7 +16,6 @@ public class Client {
 
     public Client() {
         String [] clientNames = new  String[] {"Василий", "Анна", "Петр","Александра"};
-        String [] arrIp = new String[] {"127.0.0.1.","255.255.255.255", "192.158.1.38.", "192.168.50.1."};
         clientName = clientNames[(int)(Math.random()*3)];
         this.ip="0.0.0.0";
     }

@@ -2,15 +2,17 @@ package server.treads;
 
 import common.Connection;
 import common.Message;
+import server.MessageFromClient;
+
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class ReadThread extends Thread{
 
-    private ArrayBlockingQueue<Message> messages;
+    private ArrayBlockingQueue<MessageFromClient> messages;
     private Connection <Message> connection;
 
-    public ReadThread (ArrayBlockingQueue<Message> messages, Connection <Message> connection){
+    public ReadThread (ArrayBlockingQueue<MessageFromClient> messages, Connection <Message> connection){
         this.messages = messages;
         this.connection = connection;
     }
@@ -22,10 +24,10 @@ public class ReadThread extends Thread{
         while (!Thread.currentThread().isInterrupted()){
 
             try {
-                Message fromClient = connection.readMessage();
-                fromClient.setSender(connection);
+                Message clientMessage = connection.readMessage();
+                MessageFromClient fromClient = new MessageFromClient(clientMessage, connection);
                 messages.put(fromClient);
-                System.out.println(fromClient.getText());
+                System.out.println(fromClient.getMessage().getText());
             } catch (IOException | ClassNotFoundException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
